@@ -39,3 +39,5 @@ console.log(test.length()); // 11
 console.log("");
 test.clear();
 console.log(test.length()); // 0
+
+console.log(test.keys()); // []

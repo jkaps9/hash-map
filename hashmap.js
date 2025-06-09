@@ -88,6 +88,15 @@ export class HashMap {
 
   keys() {
     //returns an array containing all the keys inside the hash map.
+    let allKeys = [];
+    for (let i = 0; i < this.buckets.length; i++) {
+      if (this.buckets[i] !== undefined) {
+        for (let j = 0; j < this.buckets[i].length; j++) {
+          allKeys.push(this.buckets[i][j][0]);
+        }
+      }
+    }
+    return allKeys;
   }
 
   values() {
