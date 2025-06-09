@@ -114,5 +114,12 @@ export class HashMap {
 
   entries() {
     //returns an array that contains each key, value pair. Example: [[firstKey, firstValue], [secondKey, secondValue]]
+    let allEntries = [];
+    let allKeys = this.keys();
+
+    for (let i = 0; i < allKeys.length; i++) {
+      allEntries.push([allKeys[i], this.get(allKeys[i])]);
+    }
+    return allEntries;
   }
 }
