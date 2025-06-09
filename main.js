@@ -24,10 +24,32 @@ test.set("ice cream", "vanilla");
 
 console.log("after overwriting keys: " + test.length());
 
-console.log(test.buckets);
-
 test.set("moon", "silver");
 
 console.log("length after exceeding load factor: " + test.length());
 console.log("capacity after exceeding load factor: " + test.capacity);
-console.log(test.buckets);
+
+console.log(test.get("kite") + " " + test.length()); // pink 13
+test.set("kite", "neon pink");
+console.log(test.get("kite") + " " + test.length()); // neon pink 13
+
+console.log(test.get("jacket")); // navy blue
+
+console.log(test.has("lion")); // true
+console.log(test.has("phone")); // false
+
+console.log(test.has("frog")); // true
+test.remove("frog");
+console.log(test.has("frog")); // false
+
+console.log(test.length()); // 12
+
+console.log(test.keys());
+console.log();
+console.log(test.values());
+console.log();
+console.log(test.entries());
+console.log();
+
+test.clear();
+console.log(test.length()); // 0
