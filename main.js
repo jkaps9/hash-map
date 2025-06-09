@@ -35,3 +35,7 @@ console.log(test.buckets);
 
 console.log("");
 console.log(test.length()); // 11
+
+console.log("");
+test.clear();
+console.log(test.length()); // 0

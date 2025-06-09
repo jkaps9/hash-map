@@ -83,6 +83,7 @@ export class HashMap {
 
   clear() {
     //removes all entries in the hash map.
+    this.buckets = new Array(this.capacity);
   }
 
   keys() {
