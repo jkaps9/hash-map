@@ -1,5 +1,5 @@
-export class Hashmap {
-  constructor(load_factor, capacity) {
+export class HashMap {
+  constructor(load_factor, capacity = 16) {
     this.load_factor = load_factor;
     this.capacity = capacity;
   }
