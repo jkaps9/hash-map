@@ -101,6 +101,15 @@ export class HashMap {
 
   values() {
     //returns an array containing all the values.
+    let allValues = [];
+    for (let i = 0; i < this.buckets.length; i++) {
+      if (this.buckets[i] !== undefined) {
+        for (let j = 0; j < this.buckets[i].length; j++) {
+          allValues.push(this.buckets[i][j][1]);
+        }
+      }
+    }
+    return allValues;
   }
 
   entries() {
