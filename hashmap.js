@@ -31,7 +31,16 @@ export class HashMap {
     let hashCode = this.hash(key);
     this.checkIndex(hashCode); // will throw error if index is out of bounds
     this.buckets[hashCode] = this.buckets[hashCode] || [];
-    this.buckets[hashCode].push([key, value]);
+    if (this.has(key)) {
+      //find the entry with the key and overwrite the value
+      for (let i = 0; i < this.buckets[hashCode].length; i++) {
+        if (this.buckets[hashCode][i][0] === key) {
+          this.buckets[hashCode][i][1] = value;
+        }
+      }
+    } else {
+      this.buckets[hashCode].push([key, value]);
+    }
   }
 
   get(key) {

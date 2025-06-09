@@ -14,3 +14,9 @@ test.set("ice cream", "white");
 test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
+
+console.log("initial length: " + test.length());
+
+test.set("lion", "maroon");
+
+console.log("after overwriting keys: " + test.length());
