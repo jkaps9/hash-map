@@ -1,7 +1,14 @@
 export class HashMap {
-  constructor(load_factor, capacity = 16) {
+  constructor(load_factor) {
     this.load_factor = load_factor;
-    this.capacity = capacity;
+    this.capacity = 16;
+    this.buckets = new Array(this.capacity);
+  }
+
+  checkIndex(index) {
+    if (index < 0 || index >= this.buckets.length) {
+      throw new Error("Trying to access index out of bounds");
+    }
   }
 
   hash(key) {
@@ -21,6 +28,11 @@ export class HashMap {
     // If a key already exists, then the old value is overwritten, and we can say that we update the key’s value
     // (e.g. Carlos is our key but it is called twice: once with value I am the old value., and once with value I am the new value..
     // Following this logic, Carlos should contain only the latter value)
+    let hashCode = this.hash(key);
+    this.checkIndex(hashCode); // will throw error if index is out of bounds
+    this.buckets[hashCode] = this.buckets[hashCode] || [];
+    this.buckets[hashCode].push([key, value]);
+    console.log(this.buckets[hashCode]);
   }
 
   get(key) {
