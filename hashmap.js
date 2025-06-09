@@ -32,11 +32,20 @@ export class HashMap {
     this.checkIndex(hashCode); // will throw error if index is out of bounds
     this.buckets[hashCode] = this.buckets[hashCode] || [];
     this.buckets[hashCode].push([key, value]);
-    console.log(this.buckets[hashCode]);
   }
 
   get(key) {
     //takes one argument as a key and returns the value that is assigned to this key. If a key is not found, return null
+    let hashCode = this.hash(key);
+    this.checkIndex(hashCode); // will throw error if index is out of bounds
+    let arr = this.buckets[hashCode];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][0] === key) {
+        return arr[i][1];
+      }
+    }
+
+    return null;
   }
 
   has(key) {
