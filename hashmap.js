@@ -72,6 +72,13 @@ export class HashMap {
 
   length() {
     //returns the number of stored keys in the hash map
+    let keyCount = 0;
+    for (let i = 0; i < this.buckets.length; i++) {
+      if (this.buckets[i] !== undefined) {
+        keyCount += this.buckets[i].length;
+      }
+    }
+    return keyCount;
   }
 
   clear() {

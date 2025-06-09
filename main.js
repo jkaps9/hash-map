@@ -1,7 +1,7 @@
 import { HashMap } from "./hashmap.js";
 
 const test = new HashMap(0.75);
-console.log(test.buckets);
+
 test.set("apple", "red");
 test.set("banana", "yellow");
 test.set("carrot", "orange");
@@ -14,6 +14,8 @@ test.set("ice cream", "white");
 test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
+
+console.log(test.length()); // 12
 
 console.log(test.get("frog")); // green
 console.log(test.get("grape")); // purple
@@ -29,5 +31,7 @@ console.log(test.buckets);
 console.log("");
 console.log(test.remove("grape")); // true
 console.log(test.remove("melon")); // false
-
 console.log(test.buckets);
+
+console.log("");
+console.log(test.length()); // 11
