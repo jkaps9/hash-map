@@ -5,8 +5,8 @@ export class HashMap {
     this.buckets = new Array(this.capacity);
   }
 
-  checkIndex(index) {
-    if (index < 0 || index >= this.buckets.length) {
+  checkIndex(index, max) {
+    if (index < 0 || index >= max) {
       throw new Error("Trying to access index out of bounds");
     }
   }
@@ -28,10 +28,9 @@ export class HashMap {
     // If a key already exists, then the old value is overwritten, and we can say that we update the key’s value
     // (e.g. Carlos is our key but it is called twice: once with value I am the old value., and once with value I am the new value..
     // Following this logic, Carlos should contain only the latter value)
-    let hashCode = this.hash(key);
-    this.checkIndex(hashCode); // will throw error if index is out of bounds
-    this.buckets[hashCode] = this.buckets[hashCode] || [];
+
     if (this.has(key)) {
+      let hashCode = this.hash(key);
       //find the entry with the key and overwrite the value
       for (let i = 0; i < this.buckets[hashCode].length; i++) {
         if (this.buckets[hashCode][i][0] === key) {
@@ -39,6 +38,12 @@ export class HashMap {
         }
       }
     } else {
+      if (this.length() + 1 > this.load_factor * this.capacity) {
+        this.grow();
+      }
+      let hashCode = this.hash(key);
+      this.checkIndex(hashCode, this.capacity); // will throw error if index is out of bounds
+      this.buckets[hashCode] = this.buckets[hashCode] || [];
       this.buckets[hashCode].push([key, value]);
     }
   }
@@ -48,12 +53,13 @@ export class HashMap {
     let hashCode = this.hash(key);
     this.checkIndex(hashCode); // will throw error if index is out of bounds
     let arr = this.buckets[hashCode];
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i][0] === key) {
-        return arr[i][1];
+    if (arr !== undefined) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i][0] === key) {
+          return arr[i][1];
+        }
       }
     }
-
     return null;
   }
 
@@ -130,5 +136,20 @@ export class HashMap {
       allEntries.push([allKeys[i], this.get(allKeys[i])]);
     }
     return allEntries;
+  }
+
+  grow() {
+    // Create a new array that is double the size of the existing one
+    // Copy all existing nodes to the new Array hashing their keys again
+    let newBuckets = new Array(this.capacity * 2);
+    let allEntries = this.entries();
+    this.capacity *= 2;
+    for (let i = 0; i < allEntries.length; i++) {
+      let hashCode = this.hash(allEntries[i][0]);
+      this.checkIndex(hashCode, this.capacity * 2);
+      newBuckets[hashCode] = newBuckets[hashCode] || [];
+      newBuckets[hashCode].push([allEntries[i][0], allEntries[i][1]]);
+    }
+    this.buckets = newBuckets;
   }
 }

@@ -17,6 +17,17 @@ test.set("lion", "golden");
 
 console.log("initial length: " + test.length());
 
-test.set("lion", "maroon");
+test.set("lion", "golden brown");
+test.set("apple", "bright red");
+test.set("jacket", "navy blue");
+test.set("ice cream", "vanilla");
 
 console.log("after overwriting keys: " + test.length());
+
+console.log(test.buckets);
+
+test.set("moon", "silver");
+
+console.log("length after exceeding load factor: " + test.length());
+console.log("capacity after exceeding load factor: " + test.capacity);
+console.log(test.buckets);
