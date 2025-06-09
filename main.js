@@ -17,3 +17,7 @@ test.set("lion", "golden");
 console.log(test.get("frog")); // green
 console.log(test.get("grape")); // purple
 console.log(test.get("melon")); // null
+
+console.log(test.has("frog")); // true
+console.log(test.has("grape")); // true
+console.log(test.has("melon")); // false

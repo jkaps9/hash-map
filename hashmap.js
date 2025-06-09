@@ -50,6 +50,7 @@ export class HashMap {
 
   has(key) {
     //takes a key as an argument and returns true or false based on whether or not the key is in the hash map
+    return this.get(key) !== null;
   }
 
   remove(key) {
