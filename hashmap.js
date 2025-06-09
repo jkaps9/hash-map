@@ -55,6 +55,19 @@ export class HashMap {
 
   remove(key) {
     //takes a key as an argument. If the given key is in the hash map, it should remove the entry with that key and return true. If the key isn’t in the hash map, it should return false
+    if (this.has(key)) {
+      let hashCode = this.hash(key);
+      this.checkIndex(hashCode); // will throw error if index is out of bounds
+      let arr = this.buckets[hashCode];
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i][0] === key) {
+          this.buckets[hashCode].splice(i, 1);
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
   length() {
